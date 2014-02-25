@@ -157,7 +157,7 @@ Discourse.Formatter = (function(){
 
   relativeAgeTiny = function(date){
     var format = "tiny";
-    var distance = Math.round((new Date() - date) / 1000);
+    var distance = Math.abs(Math.round((new Date() - date) / 1000));
     var distanceInMinutes = Math.round(distance / 60.0);
 
     var formatted;
@@ -211,7 +211,7 @@ Discourse.Formatter = (function(){
   relativeAgeMediumSpan = function(distance, leaveAgo) {
     var formatted, distanceInMinutes;
 
-    distanceInMinutes = Math.round(distance / 60.0);
+    distanceInMinutes = Math.abs(Math.round(distance / 60.0));
 
     var t = function(key, opts){
       return I18n.t("dates.medium" + (leaveAgo?"_with_ago":"") + "." + key, opts);
@@ -242,7 +242,7 @@ Discourse.Formatter = (function(){
     var wrapInSpan = options.wrapInSpan === false ? false : true;
 
     leaveAgo = options.leaveAgo;
-    var distance = Math.round((new Date() - date) / 1000);
+    var distance = Math.abs(Math.round((new Date() - date) / 1000));
 
     if (!date) {
       return "&mdash;";

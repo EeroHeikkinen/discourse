@@ -45,4 +45,3 @@ Discourse::Application.configure do
 
   config.enable_anon_caching = false
 end
-

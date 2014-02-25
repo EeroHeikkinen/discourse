@@ -15,11 +15,11 @@ end
 class Rails::Application::Configuration
 
   def database_configuration_with_global_config
-    if Rails.env == "production"
-      GlobalSetting.database_config
-    else
-      database_configuration_without_global_config
-    end
+    #if Rails.env == "production"
+    GlobalSetting.database_config
+#    else
+#      database_configuration_without_global_config
+#    end
   end
 
   alias_method_chain :database_configuration, :global_config
@@ -165,3 +165,4 @@ module Discourse
 
   end
 end
+#Substitute token in built appliances
