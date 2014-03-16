@@ -49,9 +49,13 @@ class Admin::BackupsController < Admin::AdminController
   end
 
   def destroy
-    filename = params.fetch(:id)
-    Backup.remove(filename)
-    render nothing: true
+    backup = Backup[params.fetch(:id)]
+    if backup
+      backup.remove
+      render nothing: true
+    else
+      render nothing: true, status: 404
+    end
   end
 
   def logs
@@ -100,14 +104,16 @@ class Admin::BackupsController < Admin::AdminController
   end
 
   def upload_chunk
-    filename = params.fetch(:resumableFilename)
-    return render nothing:true, status: 415 unless filename.to_s.end_with?(".tar.gz")
+    filename   = params.fetch(:resumableFilename)
+    total_size = params.fetch(:resumableTotalSize).to_i
+
+    return render status: 415, text: I18n.t("backup.backup_file_should_be_tar_gz") unless filename.to_s.end_with?(".tar.gz")
+    return render status: 415, text: I18n.t("backup.not_enough_space_on_disk")     unless has_enough_space_on_disk?(total_size)
 
     file               = params.fetch(:file)
     identifier         = params.fetch(:resumableIdentifier)
     chunk_number       = params.fetch(:resumableChunkNumber).to_i
     chunk_size         = params.fetch(:resumableChunkSize).to_i
-    total_size         = params.fetch(:resumableTotalSize).to_i
     current_chunk_size = params.fetch(:resumableCurrentChunkSize).to_i
 
     # path to chunk file
@@ -128,6 +134,12 @@ class Admin::BackupsController < Admin::AdminController
     end
 
     render nothing: true
+  end
+
+  private
+
+  def has_enough_space_on_disk?(size)
+    `df -Pk . | awk 'NR==2 {print $4 * 1024;}'`.to_i > size
   end
 
 end

@@ -26,33 +26,33 @@
 
 #topic-title {
   margin-bottom: 20px;
-margin: 0 60px 10px 20px;
-line-height: 1.7em;
+  margin: 0 60px 10px 20px;
+  line-height: 1.7em;
 
-h1 {
-  font-size: 1.5em;
-  margin:0;
-
-a.edit-topic {font-size: 15px;}
-
+  h1 {
+    font-size: 1.5em;
+    margin:0;
+    a.edit-topic {font-size: 15px;}
+  }
+  .private-message-glyph { display: none; }
 }
 
-
-}
+.private-message-glyph { color: lighten($primary_text_color, 60%); }
+.private_message #topic-title .private-message-glyph { display: inline; }
 
 #topic-closing-info {
   margin-left: 10px;
 }
 
 .docked #topic-progress {
-	  box-shadow: 0 0 3px rbga($primary_shadow_color, .5);
+  box-shadow: 0 0 3px rbga($primary_shadow_color, .5);
 }
 
 #topic-progress-wrapper {
   position: fixed;
   width: 0;
   right: 0;
-  bottom: 0px;
+  bottom: 0;
   z-index: 500;
   margin-right: 140px;
   outline: 1px solid transparent;
@@ -65,7 +65,7 @@ a.edit-topic {font-size: 15px;}
 
 #topic-progress {
 
-	  box-shadow: 0 0 3px rbga($primary_shadow_color, .7);
+  box-shadow: 0 0 3px rbga($primary_shadow_color, .7);
 
   position: relative;
   &.hidden {
@@ -119,9 +119,9 @@ a.edit-topic {font-size: 15px;}
   }
   .bg {
     position: absolute;
-    top: 0px;
-    bottom: 0px;
-    width: 0px;
+    top: 0;
+    bottom: 0;
+    width: 0;
     border-right: 1px solid $primary_border_color;
     // background-color: #d4eaf4;
     // background-color: #C5E8F7;
@@ -130,8 +130,6 @@ a.edit-topic {font-size: 15px;}
 }
 
 #topic-progress-wrapper.docked {
-  #topic-progress {
-  }
   position: absolute;
 }
 

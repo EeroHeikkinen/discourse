@@ -1,7 +1,10 @@
 @import "common/foundation/variables";
 @import "common/foundation/mixins";
 
-.post-info a {color: lighten($primary_text_color, 50%);}
+.post-info a {
+  color: lighten($primary_text_color, 50%);
+  padding-right: 5px;
+}
 
 .topic-meta-data-inside {
   float: right;
@@ -52,7 +55,7 @@
     }
   }
   h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin: 0;
     line-height: 1.2em;
     overflow: hidden;
@@ -64,10 +67,14 @@
     .fa-thumb-tack { margin-top: -1px; }
   }
   .chzn-container { vertical-align: middle; }
+  .private-message-glyph { display: none; }
 }
 
+.private-message-glyph { color: lighten($primary_text_color, 60%); }
+.private_message #topic-title .private-message-glyph { display: inline; }
+
 #topic-closing-info {
-  border-top: 1px solid lighten($primary_border_color, 10%) ;
+  border-top: 1px solid $primary_border_color;
   padding-top: 10px;
   height: 20px;
 }
@@ -76,7 +83,7 @@
   position: fixed;
   right: 50%;
   width: 0;
-  bottom: 0px;
+  bottom: 0;
   z-index: 500;
   outline: 1px solid transparent;
 }
@@ -96,7 +103,7 @@
 
 a.reply-new {
   position: absolute;
-  color: lighten($primary_text_color, 35%); 
+  color: lighten($primary_text_color, 35%);
   margin-top: -2px;}
 a:hover.reply-new {
   color: $link-color;
@@ -108,7 +115,7 @@ a:hover.reply-new {
 
 #topic-progress {
   position: relative;
-  left: 302px;
+  left: 345px;
   &.hidden {
     display: none;
   }
@@ -159,9 +166,9 @@ a:hover.reply-new {
   }
   .bg {
     position: absolute;
-    top: 0px;
-    bottom: 0px;
-    width: 0px;
+    top: 0;
+    bottom: 0;
+    width: 0;
     border-right: 1px solid  $primary_border_color;
     // background-color: #d4eaf4;
     // background-color: #C5E8F7;
@@ -171,8 +178,6 @@ a:hover.reply-new {
 }
 
 #topic-progress-wrapper.docked {
-  #topic-progress {
-  }
   position: absolute;
   bottom: -70px;
 

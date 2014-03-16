@@ -22,7 +22,7 @@ Discourse.TopicController = Discourse.ObjectController.extend(Discourse.Selected
 
   actions: {
     jumpTop: function() {
-      Discourse.URL.routeTo(this.get('url'));
+      Discourse.URL.routeTo(this.get('firstPostUrl'));
     },
 
     jumpBottom: function() {
@@ -163,7 +163,8 @@ Discourse.TopicController = Discourse.ObjectController.extend(Discourse.Selected
     },
 
     togglePinned: function() {
-      this.get('content').toggleStatus('pinned');
+      // Note that this is different than clearPin
+      this.get('content').setStatus('pinned', this.get('pinned_at') ? false : true);
     },
 
     toggleArchived: function() {

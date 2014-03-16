@@ -27,12 +27,18 @@
 }
 
 .full-width {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 h1 .topic-statuses .topic-status i {margin-right: 5px;}
 
-.logo-small {margin-right: 8px;}
+.logo-small {
+  margin-right: 8px;
+  width: auto;
+  max-width: 80px;
+  height: auto;
+  max-height: 40px;
+  }
 
 .post-cloak {
   padding: 0;
@@ -48,10 +54,16 @@ h1 .topic-statuses .topic-status i {margin-right: 5px;}
   left: 120px;
   z-index: 400;
   padding: 5px 12px;
-  border: 1px solid lighten($primary_border_color, 10%);
+  border: 1px solid $primary_border_color;
   font-size: 12px;
   margin-left: -8px;
   background: $primary_background_color;
+  @include medium-width {
+  left: 107px;
+  }
+  @include small-width {
+  left: 103px;
+  }
 }
 
 .avoid-tab {
@@ -63,8 +75,8 @@ h1 .topic-statuses .topic-status i {margin-right: 5px;}
   .reply-new {
     .discourse-no-touch & {
      opacity:0;
-     transition: linear 0.4s;
-     -webkit-transition: linear 0.4s;
+     transition: opacity linear 0.4s;
+     -webkit-transition: opacity linear 0.4s;
     }
     .discourse-touch & {opacity: 1;}
   }
@@ -73,8 +85,8 @@ h1 .topic-statuses .topic-status i {margin-right: 5px;}
 section.post-menu-area, .post-actions {
     .discourse-no-touch & {
       opacity: 0.2;
-       transition: linear 0.4s;
-    -webkit-transition: linear 0.4s;
+       transition: opacity linear 0.4s;
+    -webkit-transition: opacity linear 0.4s;
     }
     .discourse-touch & {opacity: 1;}
   }
@@ -111,7 +123,7 @@ nav.post-controls {
 
   button.show-replies {
     padding: 8px 15px;
-    margin-left: 0px;
+    margin-left: 0;
   }
 
 
@@ -200,9 +212,9 @@ nav.post-controls {
     .quote .title {background: lighten($secondary_background_color, 60%);}
     blockquote {background: lighten($secondary_background_color, 60%);}
     .onebox {
-    background: lighten($secondary_background_color, 60%); 
+    background: lighten($secondary_background_color, 60%);
     border-left: 5px solid lighten($secondary_background_color, 35%);
-    .quote-controls, .quote-controls a {color: $link-color;} 
+    .quote-controls, .quote-controls a {color: $link-color;}
     }
     &.bottom { margin-top: -11px;}
     .topic-meta-data h5 {margin: 5px;}
@@ -231,7 +243,7 @@ a.star {
 
 .topic-map {
   margin: 20px 0 0 0;
-  border: 1px solid lighten($primary_border_color, 10%);
+  border: 1px solid $primary_border_color;
 
   .buttons .btn {
     &:hover {border: 1px solid $primary_border_color !important;}
@@ -345,9 +357,6 @@ a.star {
 
       }
 
-      &:active {
-      }
-
       &.collapsed {
         border-bottom: 0;
         padding-bottom: 1px;
@@ -362,7 +371,7 @@ a.star {
 }
 
 #topic-footer-buttons {
-  padding: 10px 10px 0 10px;
+  padding: 10px 10px 0 0;
   p {
     line-height: 32px;
     color: $secondary_text_color;
@@ -372,10 +381,13 @@ a.star {
 
 #suggested-topics {
   clear: left;
-  padding: 20px 10px 15px 10px;
-
-  .topics table tbody tr {background: $primary_background_color;}
-
+  padding: 20px 0 15px 0;
+  #topic-list > tbody > tr:nth-child(even) {
+    background-color: lighten($secondary_background_color, 77%);
+  }
+  #topic-list > tbody > tr:nth-child(odd) {
+    background-color: $primary_background_color;
+  }
   table {
     box-shadow: none;
     border-radius: 0;
@@ -428,13 +440,31 @@ iframe {
 .extra-info-wrapper {
   float: left;
   width: 78%;
+  max-width: 800px;
   .topic-statuses {margin-right: 5px;}
 }
+
+
+@include medium-width {
+  .extra-info-wrapper {
+  max-width: 720px;
+}
+}
+
+/**/
+
+
+@include small-width {
+    .extra-info-wrapper {
+  max-width: 680px;
+}
+}
+
 
 .extra-info {
   h1 {
     margin: 5px 0 0 0;
-    font-size: 2em;
+    font-size: 1.8em;
     line-height: 1.2em;
   }
 
@@ -455,7 +485,7 @@ iframe {
 .topic-meta-data {
   margin-bottom: 10px;
   width: 92px;
-  border-top: 1px solid lighten($primary_border_color, 10%);
+  border-top: 1px solid $primary_border_color;
   padding-top: 30px;
 
   img {
@@ -492,7 +522,7 @@ iframe {
       font-weight: normal;
       font-size: 12px;
       margin-top: 2px;
-      a {color: $primary_text_color;}
+      a {color: $secondary_text_color;}
 
     }
   }
@@ -529,7 +559,6 @@ iframe {
   word-wrap: break-word;
 
   h1, h2, h3, h4, h5, h6 { margin: 30px 0 10px; }
-  li p {margin: 3px 0;}
 
 }
 
@@ -559,6 +588,7 @@ iframe {
 .moderator {
   .topic-body {
   background-color: $highlight_background_color;
+  border-bottom: 10px solid $highlight_background_color;
   }
 }
 
@@ -599,7 +629,7 @@ iframe {
 
 .topic-admin-menu {
 
-  h3 {margin-top: 0px;}
+  h3 {margin-top: 0;}
 
 
 }
@@ -613,7 +643,6 @@ iframe {
 }
 
 .staff a {
-  padding: 2px;
   margin: -2px 0 0 0;
   background-color: $highlight_background_color;
 }
@@ -632,7 +661,7 @@ position: relative;
 
 
 .user-title {
-  margin-top: 8px;
+  margin-top: 5px;
   color: $secondary_text_color;
   overflow: hidden;
   font-size: 80%;
@@ -649,7 +678,7 @@ blockquote { /* solo quotes */
   margin: 14px 0;
   padding: 12px;
 
-    a.mention {background: $secondary_text_color;}
+    a.mention {background: lighten($secondary_background_color, 60%);}
     p:first-of-type {margin-top: 0;}
     p:last-of-type {margin-bottom: 0;}
 }
@@ -702,8 +731,7 @@ blockquote { /* solo quotes */
 
 .gutter {
   float: left;
-  max-width: 250px;
-  width: 15%;
+
   margin-top: 6px;
       ul {margin: 0;}
       padding-left: 10px;
@@ -729,13 +757,12 @@ blockquote { /* solo quotes */
 }
 
 .topic-body {
-  border-top: 1px solid lighten($primary_border_color, 10%);
+  border-top: 1px solid $primary_border_color;
   float: left;
   position: relative;
-  width: 720px;
-  padding: 10px 10px 15px 20px;
+  padding: 10px 0 15px 0;
   .highlighted {
-    background-color: $highlight_background_color !important;
+    background-color: $emphasis_background_color !important;
   }
   img, svg {
     max-width: 100%;
@@ -756,10 +783,10 @@ blockquote { /* solo quotes */
 
 //columns
 
-.span14 { width: 70%; max-width: 720px; } //main content
-.span2 {max-width: 92px;}
-.span11 {width: 80%; max-width: 580px;}
-.span5 {max-width: 250px;}
+.span14 { width: 70%; padding-left: 1%; } //main content
+.span2 {width: 9%; }
+.span11 {width: 83%; padding-left: 2%; padding-right: 1%;}
+.span5 {width: 19%; padding-left: 1%; }
 
 
 @media screen and (max-width: 966px) {
@@ -772,12 +799,29 @@ blockquote { /* solo quotes */
 
 .embedded-posts {
   h1, h2, h3 {margin: 10px 0;}
+  a.mention {background: lighten($secondary_background_color, 60%);}
   &.bottom {
+    .topic-meta-data {padding-left: 13px;}
     &.hidden {display: block; opacity: 0; }
 
   }
   &.bottom .arrow {float: right; margin: 0 0 0 0;}
-  &.top {margin-left: 112px;}
+  &.top {
+
+    margin-left: 112px;
+    max-width: 775px;
+    .topic-meta-data {padding-left: 13px;}
+
+    @include medium-width {
+    margin-left: 99px;
+    }
+
+    @include small-width {
+    margin-left: 95px;
+    max-width: 720px;
+    }
+  }
+  &.top.span14 {padding-left: 0;}
   .topic-body, .topic-meta-data {border: none;}
   .row {border-top: 1px solid $primary_border_color; padding-top: 7px;}
   .reply:first-of-type .row {border-top: none;}
@@ -805,18 +849,8 @@ button.show-replies {
 
 }
 
-.btn-group .dropdown-toggle:active,
-.btn-group.open .dropdown-toggle {
-}
-
 .dropdown {
   position: relative;
-}
-.dropdown-toggle {
-  *margin-bottom: -3px;
-}
-.dropdown-toggle:active,
-.open .dropdown-toggle {
 }
 .caret {
   display: inline-block;
@@ -861,9 +895,6 @@ button.show-replies {
   color: $tertiary_text_color;
   text-decoration: none;
   background-color: $emphasis_text_color;
-}
-.open {
-  *z-index: 1000;
 }
 .open > .dropdown-menu {
   display: block;
@@ -958,8 +989,6 @@ clear: both;
         }
       }
       .topic-body {
-        .contents {
-        }
         .contents:after {
           display: none;
         }

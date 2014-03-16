@@ -2,6 +2,9 @@
 # This file contains content for the client portion of Discourse, sent out
 # to the Javascript app.
 #
+# To work with us on translations, see:
+# https://www.transifex.com/projects/p/discourse-pt-br/
+#
 # To validate this YAML file after you change it, please paste it into
 # http://yamllint.com/
 
@@ -49,7 +52,7 @@ en:
         almost_x_years:
           one:   "1y"
           other: "%{count}y"
-        date_month: "MMM D"
+        date_month: "D MMM"
         date_year: "MMM 'YY"
       medium:
         x_minutes:
@@ -298,6 +301,9 @@ en:
         upload_title: "Upload your picture"
         image_is_not_a_square: "Warning: we've cropped your image; it is not square."
 
+      change_profile_background:
+        title: "Change Profile Background"
+
       email:
         title: "Email"
         instructions: "Your email will never be shown to the public."
@@ -341,22 +347,22 @@ en:
       website: "Web Site"
       email_settings: "Email"
       email_digests:
-        title: "When I don't visit the site, send me an email digest of what's new"
+        title: "When you don't visit the site, send an email digest of what's new:"
         daily: "daily"
         weekly: "weekly"
         bi_weekly: "every two weeks"
 
       email_direct: "Receive an email when someone quotes you, replies to your post, or mentions your @username"
       email_private_messages: "Receive an email when someone sends you a private message"
-      email_always: "Receive email notifications and email digests even if I am active on the forum"
+      email_always: "Receive email notifications and email digests even if you are active on the forum"
 
       other_settings: "Other"
       categories_settings: "Categories"
 
       new_topic_duration:
         label: "Consider topics new when"
-        not_viewed: "I haven't viewed them yet"
-        last_here: "they were posted since I was here last"
+        not_viewed: "you haven't viewed them yet"
+        last_here: "they were posted since you were here last"
         after_n_days:
           one: "they were posted in the last day"
           other: "they were posted in the last {{count}} days"
@@ -364,7 +370,7 @@ en:
           one: "they were posted in the last week"
           other: "they were posted in the last {{count}} weeks"
 
-      auto_track_topics: "Automatically track topics I enter"
+      auto_track_topics: "Automatically track topics you enter"
       auto_track_options:
         never: "never"
         always: "always"
@@ -474,7 +480,7 @@ en:
       title: "Log In"
       username: "Login"
       password: "Password"
-      email_placeholder: "email address or username"
+      email_placeholder: "email or username"
       error: "Unknown error"
       reset_password: 'Reset Password'
       logging_in: "Logging In..."
@@ -630,6 +636,7 @@ en:
       bulk:
         reset_read: "Reset Read"
         dismiss_read: "Dismiss Read"
+        dismiss_new: "Dismiss New"
         toggle: "toggle bulk selection of topics"
         actions: "Bulk Actions"
         change_category: "Change Category"
@@ -661,7 +668,7 @@ en:
         top: "There are no more top topics."
 
     topic:
-      filter_to: "Show {{post_count}} posts in topic"
+      filter_to: "{{post_count}} posts in topic"
       create: 'Create Topic'
       create_long: 'Create a new Topic'
       private_message: 'Start a private message'
@@ -679,6 +686,7 @@ en:
       invalid_access:
         title: "Topic is private"
         description: "Sorry, you don't have access to that topic!"
+        login_required: "You need to log in to see that topic."
       server_error:
         title: "Topic failed to load"
         description: "Sorry, we couldn't load that topic, possibly due to a connection problem. Please try again. If the problem persists, let us know."
@@ -734,8 +742,8 @@ en:
 
       progress:
         title: topic progress
-        jump_top: jump to first post
-        jump_bottom: jump to last post
+        jump_top: jump to first post (home key)
+        jump_bottom: jump to last post (end key)
         jump_bottom_with_number: "jump to post %{post_number}"
         total: total posts
         current: current post
@@ -825,10 +833,10 @@ en:
         title: 'Invite Friends'
         action: 'Email Invite'
         help: 'send invitations to friends so they can reply to this topic with a single click'
-        to_topic: "We'll send your friend a brief email allowing them to immediately reply to this topic by clicking a link, no login required."
-        to_forum: "We'll send your friend a brief email allowing them to join the forum by clicking a link."
+        to_topic: "We'll send a brief email allowing your friend to immediately reply to this topic by clicking a link, no login required."
+        to_forum: "We'll send a brief email allowing your friend to join by clicking a link, no login required."
 
-        email_placeholder: 'email address'
+        email_placeholder: 'name@example.com'
         success: "Thanks! We mailed out an invitation to <b>{{email}}</b>. We'll let you know when they redeem your invitation. Check the invitations tab on your user page to keep track of who you've invited."
         error: "Sorry, we couldn't invite that person. Perhaps they are already a user?"
 
@@ -903,7 +911,10 @@ en:
         image_upload_not_allowed_for_new_user: "Sorry, new users can not upload images."
         attachment_upload_not_allowed_for_new_user: "Sorry, new users can not upload attachments."
 
-      abandon: "Are you sure you want to abandon your post?"
+      abandon:
+        confirm: "Are you sure you want to abandon your post?"
+        no_value: "No, keep"
+        yes_value: "Yes, abandon"
 
       archetypes:
         save: 'Save Options'
@@ -1031,7 +1042,7 @@ en:
           previous: "Previous revision"
           next: "Next revision"
           last: "Last revision"
-          comparing_previous_to_current_out_of_total: "<strong>#{{previous}}</strong> vs. <strong>#{{current}}</strong> / {{total}}"
+          comparing_previous_to_current_out_of_total: "<strong>{{previous}}</strong> vs <strong>{{current}}</strong> / {{total}}"
         displays:
           inline:
             title: "Show the rendered output with additions and removals inline"
@@ -1077,6 +1088,8 @@ en:
       security: "Security"
       auto_close_label: "Auto-close topics after:"
       auto_close_units: "hours"
+      email_in: "Custom incoming email address:"
+      email_in_allow_strangers: "Accept emails from non-users (aka strangers)"
       edit_permissions: "Edit Permissions"
       add_permission: "Add Permission"
       this_year: "this year"
@@ -1108,7 +1121,9 @@ en:
     topic_map:
       title: "Topic Summary"
       links_shown: "show all {{totalLinks}} links..."
-      clicks: "clicks"
+      clicks:
+        one: "1 click"
+        other: "%{count} clicks"
 
     topic_statuses:
       locked:
@@ -1162,6 +1177,11 @@ en:
           other: "Unread ({{count}})"
         help: "topics you are watching or tracking with unread posts"
       new:
+        lower_title_with_count:
+          zero: ""
+          one: "1 new"
+          other: "{{count}} new"
+        lower_title: "new"
         title:
           zero: "New"
           one: "New (1)"
@@ -1192,9 +1212,6 @@ en:
         this_week: "This week"
         today: "Today"
         other_periods: "see more top topics"
-        redirect_reasons:
-          new_user: "Welcome! As a new visitor, this will be your homepage until you've had some time to look around at the forum. Here's some of the most popular topics from the past."
-          not_seen_in_a_month: "Welcome back! We haven't seen you in a while. These are the top discussion topics since you've been away."
 
     browser_update: 'Unfortunately, <a href="http://www.discourse.org/faq/#browser">your browser is too old to work on this Discourse forum</a>. Please <a href="http://browsehappy.com">upgrade your browser</a>.'
 
@@ -1345,7 +1362,7 @@ en:
           text: "UPLOAD"
           uploading: "UPLOADING"
           success: "'{{filename}}' has successfully been uploaded."
-          error: "There has been an error ({{message}}) while uploading '{{filename}}'"
+          error: "There has been an error while uploading '{{filename}}': {{message}}"
         operations:
           is_running: "An operation is currently running..."
           failed: "The {{operation}} failed. Please check the logs."
@@ -1648,6 +1665,7 @@ en:
           embedding: "Embedding"
           legal: "Legal"
           uncategorized: 'Uncategorized'
+          backups: "Backups"
 
     lightbox:
       download: "download"

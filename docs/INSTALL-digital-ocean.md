@@ -4,9 +4,9 @@ This guide assumes that you have no knowledge of Ruby/Rails or Linux shell. Feel
 
 # Create New Digital Ocean Droplet
 
-Discourse requires a minimum of 1 GB RAM, and 2 GB RAM is recommended. We'll use "discourse" as the Hostname.
+Discourse requires a minimum of 1 GB RAM, however **2 GB RAM is strongly recommended**. We'll use "discourse" as the Hostname.
 
-<img src="https://meta-discourse.r.worldssl.net/uploads/default/3398/975dbf6267b4ad4f.png" width="690" height="475"> 
+<img src="https://meta-discourse.r.worldssl.net/uploads/default/3506/a6b550bd2b05b76b.png" width="638" height="500"> 
 
 Install Discourse on Ubuntu 12.04.3 LTS x64. We always recommend using [the current LTS distribution][lts].
 
@@ -32,7 +32,7 @@ You will be asked for permission to connect, type `yes`, then the root password,
 
 # Install Git
 
-    sudo apt-get install git
+    apt-get install git
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/3002/eafbf14df8eee832.png" width="572" height="263"> 
 
@@ -46,14 +46,16 @@ You will be asked for permission to connect, type `yes`, then the root password,
 
 # Install Docker
 
-    sudo apt-get update
-    sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring
+Update to a newer kernel:
+
+    apt-get update
+    apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/3001/e94722e882f28994.png" width="566" height="339"> 
 
 Reboot the server:
 
-    sudo reboot
+    reboot
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/3003/d3cc759ced335d25.png" width="532" height="155"> 
 
@@ -63,9 +65,7 @@ This will log you out from your SSH session, so reconnect:
 
 Finish installing Docker:
 
-    sudo wget -qO- https://get.docker.io/ | sh
-
-<img src="https://meta-discourse.r.worldssl.net/uploads/default/3004/e75967a1a8e27ea3.png" width="567" height="307"> 
+    wget -qO- https://get.docker.io/ | sh
 
 # Install Discourse
 
@@ -99,7 +99,7 @@ Edit as desired, but at minimum set `DISCOURSE_DEVELOPER_EMAILS` and `DISCOURSE_
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/2979/e6fedbde9b471880.png" width="565" height="172"> 
 
-I renamed `DISCOURSE_HOSTNAME` to `discourse.techapj.com`, this means that I want to host my instance of Discourse on `http://discourse.techapj.com/`. You'll need to modify your DNS records to reflect the IP address and preferred URL address of your server.
+We renamed `DISCOURSE_HOSTNAME` to `discourse.techapj.com`, this means that we want to host our instance of Discourse on `http://discourse.techapj.com/`. You'll need to modify your DNS records to reflect the IP address and preferred URL address of your server.
 
 # Mail Setup
 
@@ -108,6 +108,12 @@ I renamed `DISCOURSE_HOSTNAME` to `discourse.techapj.com`, this means that I wan
 - If you already have a mail server, put your existing mail server credentials in the `app.yml` file.
 
 - Otherwise, create a free account on [**Mandrill**][man] (or [Mailgun][gun], or [Mailjet][jet]), and put your mail credentials (available via the Mandrill dashboard) in the `app.yml` file. The settings you want to change are `DISCOURSE_SMTP_ADDRESS`, `DISCOURSE_SMTP_PORT`, `DISCOURSE_SMTP_USER_NAME`, `DISCOURSE_SMTP_PASSWORD`.
+
+- Be sure you remove the comment character and space `# ` from the beginning of these mail configuration lines!
+
+- Don't forget to set the [SPF and DKIM records](http://help.mandrill.com/entries/21751322-What-are-SPF-and-DKIM-and-do-I-need-to-set-them-up-) up for your domain name. In Mandrill, that's under Sending Domains, View DKIM/SPF setup instructions.
+
+- The name of your droplet is your reverse PTR record, so rename your droplet to `forum.example.com` so the PTR record correctly reflects your domain name.
 
 # Add Your SSH Key
 
@@ -121,7 +127,7 @@ Copy the entire output and paste it into the `ssh_key` setting in the `app.yml` 
 
 Be sure to save the `app.yml` file, and begin bootstrapping Discourse:
 
-    sudo ./launcher bootstrap app
+    ./launcher bootstrap app
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/3007/c0596ad3d330ae71.png" width="567" height="138"> 
 
@@ -129,13 +135,13 @@ This command may take some time, so be prepared to wait. It is automagically con
 
 After that completes, start Discourse:
 
-    sudo ./launcher start app
+    ./launcher start app
 
 <img src="https://meta-discourse.r.worldssl.net/uploads/default/3008/ced00cf4782f020c.png" width="568" height="137"> 
 
 Congratulations! You now have your own instance of Discourse, accessible via the domain name you entered in `app.yml` earlier.
 
-<img src="https://meta-discourse.r.worldssl.net/uploads/default/3397/ea8c3de3a4b7361d.png" width="690" height="207"> 
+<img src="https://meta-discourse.r.worldssl.net/uploads/default/3507/d01eee7415f860f2.png" width="690" height="291">
 
 You can also access it by visiting the server IP address directly, e.g. `http://192.168.1.1`.
 
@@ -154,6 +160,19 @@ If your account was not made admin, try SSH'ing into your container (assuming yo
     u.save
 
 This will manually make the first user an admin.
+
+# Post-Install Maintenance
+
+We believe most small and medium size Discourse installs will be fine with the recommended 2 GB of RAM. However, if you are using the absolute minimum 1 GB of RAM, or your forum is growing you may want to [set up a swap file](https://www.digitalocean.com/community/articles/how-to-add-swap-on-ubuntu-12-04) just in case.
+
+To **upgrade Discourse to the latest version**, visit `/admin/docker`, refresh the page a few times (yes, seriously) and then press the Upgrade button at the top. View the live output at the bottom of your browser to see when things are complete. You should see:
+
+
+    Killed sidekiq
+    Restarting unicorn pid: 37
+
+
+Then you know it's complete. (Yes, we will be improving this process soon!)
 
 If anything needs to be improved in this guide, feel free to ask on [meta.discourse.org][meta], or even better, submit a pull request.
 
