@@ -597,6 +597,7 @@ en:
       invitee_accepted: "<i title='accepted your invitation' class='fa fa-sign-in'></i> {{username}} accepted your invitation"
       moved_post: "<i title='moved post' class='fa fa-arrow-right'></i> {{username}} moved {{link}}"
       total_flagged: "total flagged posts"
+      linked: "<i title='linked post' class='fa fa-arrow-left'></i> {{username}} {{link}}"
 
     upload_selector:
       title: "Add an image"
@@ -681,7 +682,7 @@ en:
         one: '1 unread topic'
         other: '{{count}} unread topics'
       title: 'Topic'
-      loading_more: "Loading more Topics..."
+      loading_more: "Loading more topics..."
       loading: 'Loading topic...'
       invalid_access:
         title: "Topic is private"
@@ -893,8 +894,8 @@ en:
       deleted_by: "deleted by"
       expand_collapse: "expand/collapse"
       gap:
-        one: "1 post omitted"
-        other: "{{count}} posts omitted"
+        one: "1 post hidden"
+        other: "{{count}} posts hidden"
 
       has_replies:
         one: "Reply"
@@ -1101,7 +1102,7 @@ en:
       title: 'Why are you privately flagging this post?'
       action: 'Flag Post'
       take_action: "Take Action"
-      notify_action: 'Notify'
+      notify_action: 'Private message'
       delete_spammer: "Delete Spammer"
       delete_confirm: "You are about to delete <b>%{posts}</b> posts and <b>%{topics}</b> topics from this user, remove their account, block signups from their IP address <b>%{ip_address}</b>, and add their email address <b>%{email}</b> to a permanent block list. Are you sure this user is really a spammer?"
       yes_delete_spammer: "Yes, Delete Spammer"
@@ -1116,7 +1117,7 @@ en:
     flagging_topic:
       title: "Why are you privately flagging this topic?"
       action: "Flag Topic"
-      notify_action: "Notify"
+      notify_action: "Private message"
 
     topic_map:
       title: "Topic Summary"
@@ -1413,6 +1414,8 @@ en:
         title: "Email"
         settings: "Settings"
         all: "All"
+        sending_test: "Sending test Email..."
+        test_error: "There was an issue sending email. Please check your settings and try again."
         sent: "Sent"
         skipped: "Skipped"
         sent_at: "Sent At"
@@ -1481,6 +1484,8 @@ en:
             delete_site_customization: "delete site customization"
             suspend_user: "suspend user"
             unsuspend_user: "unsuspend user"
+            grant_badge: "grant badge"
+            revoke_badge: "revoke badge"
         screened_emails:
           title: "Screened Emails"
           description: "When someone tries to create a new account, the following email addresses will be checked and the registration will be blocked, or some other action performed."
@@ -1675,9 +1680,19 @@ en:
         display_name: Display Name
         description: Description
         badge_type: Badge Type
+        granted_by: Granted By
+        granted_at: Granted At
         save: Save
         delete: Delete
         delete_confirm: Are you sure you want to delete this badge?
+        revoke: Revoke
+        revoke_confirm: Are you sure you want to revoke this badge?
+        edit_badges: Edit Badges
+        grant_badge: Grant Badge
+        granted_badges: Granted Badges
+        grant: Grant
+        no_user_badges: "%{name} has not been granted any badges."
+        no_badges: There are no badges that can be granted.
 
     lightbox:
       download: "download"

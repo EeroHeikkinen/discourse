@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_external_links_in_new_tab
 
   after_save :update_tracked_topics
+  after_save :clear_global_notice_if_needed
 
   after_create :create_email_token
   after_create :create_user_stat
@@ -586,6 +587,13 @@ class User < ActiveRecord::Base
     TrackedTopicsUpdater.new(id, auto_track_topics_after_msecs).call
   end
 
+  def clear_global_notice_if_needed
+    if admin && SiteSetting.has_login_hint
+      SiteSetting.has_login_hint = false
+      SiteSetting.global_notice = ""
+    end
+  end
+
   def create_user_stat
     stat = UserStat.new(new_since: Time.now)
     stat.user_id = id
@@ -723,6 +731,9 @@ end
 #  uploaded_avatar_id            :integer
 #  email_always                  :boolean          default(FALSE), not null
 #  mailing_list_mode             :boolean          default(FALSE), not null
+#  primary_group_id              :integer
+#  locale                        :string(10)
+#  profile_background            :string(255)
 #
 # Indexes
 #

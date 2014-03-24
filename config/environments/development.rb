@@ -44,4 +44,9 @@ Discourse::Application.configure do
   config.middleware.insert 1, Middleware::MissingAvatars
 
   config.enable_anon_caching = false
+  require 'rbtrace'
+
+  if emails = GlobalSetting.developer_emails
+    config.developer_emails = emails.split(",")
+  end
 end

@@ -18,20 +18,37 @@
 // Category badge
 // --------------------------------------------------
 
-.badge-category {
-  padding: 4px 6px;
-  color: $tertiary_text_color;
+.badge-category, .badge-category-parent {
   font-size: 12px;
   font-weight: bold;
   white-space: nowrap;
+  display: inline-block;
+  line-height: 1;
+  i.fa {
+    font-size: 11px;
+    vertical-align: 1px;
+  }
+}
+.badge-wrapper {
+  white-space: nowrap;
+}
+
+.badge-category {
+  padding: 6px;
+  color: $tertiary_text_color;
   &[href] {
   color: $tertiary_text_color;
   }
-  &.restricted {
-    div {
-      display: inline-block;
-      margin: 0;
-    }
+}
+
+.badge-category-parent {
+  padding: 6px 2px;
+  width: 2px;
+  .category-name {
+    display: none;
+  }
+  &:before {
+    content: "\a0";
   }
 }
 
@@ -40,7 +57,6 @@
     div {
       display: inline-block;
       margin: 0;
-      padding-right: 6px;
     }
 }}
 
