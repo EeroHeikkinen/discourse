@@ -9,7 +9,7 @@ require_dependency 'topic_query_sql'
 class TopicQuery
   # Could be rewritten to %i if Ruby 1.9 is no longer supported
   VALID_OPTIONS = %w(except_topic_ids
-                     exclude_category
+                     exclude_categories
                      limit
                      page
                      per_page
@@ -244,7 +244,7 @@ class TopicQuery
 
       result = apply_ordering(result, options)
       result = result.listable_topics.includes(category: :topic_only_relative_url)
-      result = result.where('categories.name is null or categories.name <> ?', options[:exclude_category]).references(:categories) if options[:exclude_category]
+      result = result.where('categories.name is null or categories.name NOT IN (?)', options[:exclude_categories]) if options[:exclude_categories]
 
       # Don't include the category topics if excluded
       if options[:no_definitions]

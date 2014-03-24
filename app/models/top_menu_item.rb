@@ -26,7 +26,8 @@ class TopMenuItem
   def initialize(value)
     parts = value.split(',')
     @name = parts[0]
-    @filter = initialize_filter(parts[1])
+    parts.shift
+    @filter = parts.map{|p| initialize_filter(p) }
   end
 
   attr_reader :name, :filter
