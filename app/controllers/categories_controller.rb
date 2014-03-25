@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
 
     options = {}
     options[:latest_posts] = params[:latest_posts] || SiteSetting.category_featured_topics
+    options[:exclude_categories] = select_menu_item.try(:filter)
 
     @list = CategoryList.new(guardian,options)
     @list.draft_key = Draft::NEW_TOPIC
@@ -103,5 +104,13 @@ class CategoriesController < ApplicationController
 
     def fetch_category
       @category = Category.where(slug: params[:id]).first || Category.where(id: params[:id].to_i).first
+    end
+
+    def select_menu_item
+      menu_item = SiteSetting.top_menu_items.select do |mu|
+        mu.name == "categories"
+      end.first
+
+      menu_item
     end
 end

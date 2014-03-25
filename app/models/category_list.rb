@@ -57,7 +57,8 @@ class CategoryList
       @categories = Category
                         .includes(:featured_users, subcategories: [:topic_only_relative_url])
                         .secured(@guardian)
-                        .order('position asc')
+      @categories = @categories.where('categories.name NOT IN (?)', @options[:exclude_categories] ) if @options[:exclude_categories].any?
+      @categories = @categories.order('position asc')
                         .order('COALESCE(categories.posts_week, 0) DESC')
                         .order('COALESCE(categories.posts_month, 0) DESC')
                         .order('COALESCE(categories.posts_year, 0) DESC')
